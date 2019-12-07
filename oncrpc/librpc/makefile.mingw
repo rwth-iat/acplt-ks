@@ -64,7 +64,7 @@ portmap.exe:    portmap.o oncrpc.dll
 
 oncrpc.a:     $(OBJS)
 	$(AR) crv $@ $(OBJS)
-	cmd /c copy oncrpc.a ..\bin
+	cmd /c copy oncrpc.a ..\binRPCLIBPATH
 
 oncrpc.dll:     $(OBJS)
 	$(CC) -shared -o oncrpc.dll -Wl,--output-def,oncrpc.def $(ldebug) $(OBJS) $(conlibsdll) -lwsock32 -ladvapi32
@@ -72,4 +72,4 @@ oncrpc.dll:     $(OBJS)
 	cmd /c copy oncrpc.dll ..\rpcgen
 
 %.o: %.c
-	$(CC) -c -I$(RPCINCLUDEPATH) $(cdebug) $(cflags) $(cvarsdll) $*.c
+	$(CC) -c -I$(RPCINCLUDEPATH) $(cdebug) $(cflags) $(cvarsdll) $*.ccvarsdll
