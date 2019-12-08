@@ -1,0 +1,26 @@
+image: registry.git.rwth-aachen.de/acplt/build-docker-image/dbcommands-crossbuild
+
+
+build-linux64:
+  stage: build
+  script:
+    - mkdir build-linux64
+    - cd build-linux64
+    - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=export ..
+    - make -j$(nproc)
+    - make install
+  artifacts:
+    paths:
+      - build-linux64/export/
+
+build-win32:
+  stage: build
+  script:
+    - mkdir build-win32
+    - cd build-win32
+    - cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw-w64-i686.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=export ..
+    - make -j$(nproc)
+    - make install
+  artifacts:
+    paths:
+      - build-win32/export/
