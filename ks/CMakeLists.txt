@@ -26,6 +26,7 @@ target_compile_definitions(ks PRIVATE PLT_USE_BUFFERED_STREAMS=1)
 target_include_directories(ks PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 
 target_link_libraries(ks plt)
+
 if(BUILD_RPC)
     target_link_libraries(ks rpc)
 endif()
@@ -58,7 +59,7 @@ add_library(kssvr STATIC
 
 
 # define ks client library
-add_library(kscln STATIC
+add_library(kscln ${PLT_BUILD_TYPE}
         src/avmodule.cpp
         src/avsimplemodule.cpp
         src/client.cpp
