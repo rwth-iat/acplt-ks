@@ -37,3 +37,16 @@ add_subdirectory(plt)
 add_subdirectory(oncrpc)
 add_subdirectory(ks)
 add_subdirectory(fbs_dienste)
+
+# define install rules
+install(TARGETS fb_dbcommands
+        RUNTIME DESTINATION bin)
+
+if(${BUILD_DYNAMIC})
+    install(TARGETS plt ks kscln dbservices
+            LIBRARY DESTINATION lib)
+    if(${BUILD_RPC})
+        install(TARGETS rpc
+                LIBRARY DESTINATION lib)
+    endif()
+endif ()
