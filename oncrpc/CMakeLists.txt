@@ -1,6 +1,6 @@
 
-if(WIN32)
-    add_library(rpc SHARED
+if(BUILD_RPC)
+    add_library(rpc ${PLT_BUILD_TYPE}
             librpc/auth_non.c
             librpc/auth_uni.c
             librpc/authunix.c
@@ -41,7 +41,9 @@ if(WIN32)
             librpc/xdr_refe.c
             librpc/xdr_stdi.c)
 
-    target_include_directories(rpc PUBLIC ../)
+    target_include_directories(rpc PUBLIC ${CMAKE_CURRENT_LIST_DIR}/)
+
+    target_link_libraries(rpc wsock32 advapi32)
 
     add_executable(portmap librpc/portmap.c)
 
