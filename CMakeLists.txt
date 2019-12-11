@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
 
-PROJECT(legacy)
+PROJECT(dbcommands)
 
 # disable debug define because code won't compile otherwise
 add_compile_definitions(NDEBUG)
