@@ -46,6 +46,8 @@
 #ifndef __TYPES_RPC_HEADER__
 #define __TYPES_RPC_HEADER__
 
+#include <stdlib.h>
+
 #define	bool_t	int
 #define	enum_t	int
 #ifndef FALSE
@@ -62,7 +64,7 @@
 #ifndef WIN32
 extern char *malloc();
 #endif
-#define mem_alloc	malloc
+#define mem_alloc(bsize)	malloc(bsize)
 #define mem_free(ptr, bsize)	free(ptr)
 
 #ifndef makedev /* ie, we haven't already included it */

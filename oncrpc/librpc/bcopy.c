@@ -18,6 +18,7 @@
  */
 
 #include <stdio.h>
+#include <rpc/bcopy.h>
 
 /*
  *  bcopy(char *s1, char *s2, int len) --
@@ -25,11 +26,12 @@
  */
 void
 bcopy(s1, s2, len)
-	char *s1, *s2;
-	int len;
+	const void *s1;
+	void *s2;
+	unsigned int len;
 {
 	for(; len > 0; len--)
-		*s2++ = *s1++;
+		*(char*)s2++ = *(char*)s1++;
 }
 
 /*
@@ -38,11 +40,11 @@ bcopy(s1, s2, len)
  */
 void
 bzero(s, len)
-	char *s;
-	int len;
+	void *s;
+	unsigned int len;
 {
 	for(; len > 0; len--)
-		*s++ = (char) 0;
+		*(char*)s++ = (char) 0;
 }
 
 /*
@@ -53,11 +55,11 @@ bzero(s, len)
 */
 int
 bcmp(s1, s2, len)
-	char *s1, *s2;
-	int len;
+	const void *s1, *s2;
+	unsigned int len;
 {
 	for(; len > 0; len--, s1++, s2++)
-		if (*s1 != *s2)
+		if (*(char*)s1 != *(char*)s2)
 			return 1;
 	return 0;
 }

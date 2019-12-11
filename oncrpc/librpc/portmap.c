@@ -60,8 +60,8 @@ static	char sccsid[] = "@(#)portmap.c 1.2 85/03/13 Copyr 1984 Sun Micro";
 #include <rpc/pmap_pro.h>
 #include <stdio.h>
 
-int reg_service();
-static callit();
+void reg_service();
+static void callit();
 
 #ifdef DEBUG
 #define	syslog(e, s)	fprintf(stderr, (s))
@@ -71,7 +71,7 @@ static int debug = 0;
 #endif
 
 
-main()
+int main()
 {
 	SVCXPRT *xprt;
 	int sock, pid, t;
@@ -142,6 +142,7 @@ static struct pmaplist *
 find_service(prog, vers, prot)
 	u_long prog;
 	u_long vers;
+	int prot;
 {
 	register struct pmaplist *hit = NULL;
 	register struct pmaplist *pml;
@@ -161,7 +162,7 @@ find_service(prog, vers, prot)
 /* 
  * 1 OK, 0 not
  */
-reg_service(rqstp, xprt)
+void reg_service(rqstp, xprt)
 	struct svc_req *rqstp;
 	SVCXPRT *xprt;
 {
@@ -412,7 +413,7 @@ xdr_len_opaque_parms(xdrs, cap)
  * overrun with complaints at the expense of not hearing a valid reply ...
  */
 static
-callit(rqstp, xprt)
+void callit(rqstp, xprt)
 	struct svc_req *rqstp;
 	SVCXPRT *xprt;
 {

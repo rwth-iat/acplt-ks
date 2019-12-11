@@ -67,8 +67,8 @@ static enum xprt_stat	svcudp_stat();
 static bool_t		svcudp_getargs();
 static bool_t		svcudp_freeargs();
 static void		svcudp_destroy();
-static                  cache_set();
-static                  cache_get();
+static void             cache_set();
+static int              cache_get();
 
 
 static struct xp_ops svcudp_op = {
@@ -388,7 +388,7 @@ struct udp_cache {
  * Enable use of the cache.
  * Note: there is no disable.
  */
-svcudp_enablecache(transp, size)
+int svcudp_enablecache(transp, size)
 	SVCXPRT *transp;
 	u_long size;
 {
@@ -427,7 +427,7 @@ svcudp_enablecache(transp, size)
  * Set an entry in the cache
  */
 static
-cache_set(xprt, replylen)
+void cache_set(xprt, replylen)
 	SVCXPRT *xprt;
 	u_long replylen;
 {
@@ -492,7 +492,7 @@ cache_set(xprt, replylen)
  * return 1 if found, 0 if not found
  */
 static
-cache_get(xprt, msg, replyp, replylenp)
+int cache_get(xprt, msg, replyp, replylenp)
 	SVCXPRT *xprt;
 	struct rpc_msg *msg;
 	char **replyp;

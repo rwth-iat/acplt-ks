@@ -43,7 +43,7 @@ nt_rpc_report(LPTSTR lpszMsg)
 {
     CHAR    chMsg[256];
     HANDLE  hEventSource;
-    LPTSTR  lpszStrings[2];
+    LPCTSTR  lpszStrings[2];
 
     // Use event logging to log the error.
     //

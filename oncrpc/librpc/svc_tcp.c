@@ -361,7 +361,7 @@ readtcp(xprt, buf, len)
 	do {
 		readfds = mask;
 #ifdef WIN32
-		if (select(0 /* unused in winsock */, &readfds, (int*)NULL, (int*)NULL,
+		if (select(0 /* unused in winsock */, &readfds, (fd_set*)NULL, (fd_set*)NULL,
 #else
 		if (select(_rpc_dtablesize(), &readfds, (int*)NULL, (int*)NULL, 
 #endif

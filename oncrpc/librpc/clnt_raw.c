@@ -56,7 +56,7 @@ static char sccsid[] = "@(#)clnt_raw.c 1.22 87/08/11 Copyr 1984 Sun Micro";
 #include <rpc/rpc.h>
 #ifdef WIN32
 #include <stdlib.h>
-#endif WIN32
+#endif //WIN32
 
 #define MCALL_MSG_SIZE 24
 

@@ -192,7 +192,7 @@ clntudp_bufcreate(raddr, program, version, wait, sockp, sendsz, recvsz)
 	}
 	cu->cu_xdrpos = XDR_GETPOS(&(cu->cu_outxdrs));
 	if (*sockp < 0) {
-		int dontblock = 1;
+		unsigned long dontblock = 1;
 
 		*sockp = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 #ifdef WIN32
@@ -210,7 +210,7 @@ clntudp_bufcreate(raddr, program, version, wait, sockp, sendsz, recvsz)
 		(void)bindresvport(*sockp, (struct sockaddr_in *)0);
 		/* the sockets rpc controls are non-blocking */
 #ifdef WIN32
-		(void)ioctlsocket(*sockp, FIONBIO, (char *) &dontblock);
+		(void)ioctlsocket(*sockp, FIONBIO, (u_long *) &dontblock);
 #else
 		(void)ioctl(*sockp, FIONBIO, (char *) &dontblock);
 #endif
@@ -331,11 +331,10 @@ send_again:
 	for (;;) {
 		readfds = mask;
 #ifdef WIN32
-		switch (select(0 /* unused in winsock */, &readfds, (int *)NULL,
+		switch (select(0 /* unused in winsock */, &readfds, (fd_set *)NULL, (fd_set *)NULL, &(cu->cu_wait))) {
 #else
-		switch (select(_rpc_dtablesize(), &readfds, (int *)NULL, 
+		switch (select(_rpc_dtablesize(), &readfds, (int *)NULL, (int *)NULL, &(cu->cu_wait))) {
 #endif
-			       (int *)NULL, &(cu->cu_wait))) {
 
 		case 0:
 			time_waited.tv_sec += cu->cu_wait.tv_sec;

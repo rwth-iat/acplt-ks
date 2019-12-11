@@ -49,10 +49,12 @@ static char sccsid[] = "@(#)clnt_perror.c 1.15 87/10/07 Copyr 1984 Sun Micro";
  *
  */
 #include <stdio.h>
+#include <string.h>
 #ifdef WIN32
 #include <stdlib.h>
 #endif
 
+#include <rpc/rpc.h>
 #include <rpc/types.h>
 #include <rpc/auth.h>
 #include <rpc/clnt.h>
@@ -260,7 +262,6 @@ char *
 clnt_spcreateerror(s)
 	char *s;
 {
-	extern int sys_nerr;
 #ifndef WIN32
 	extern char *sys_errlist[];
 #endif

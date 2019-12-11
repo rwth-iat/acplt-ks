@@ -11,11 +11,12 @@
 extern "C" {
 #endif
 
-void bcopy(char *,char*,int);
-void bcopy_nf(char *,char *,int);
-void bcopy_fn(char *,char *,int);
-void bcopy_ff(char *,char *,int);
-void bzero(char*,int);
+void bcopy(const void *,void*, unsigned int);
+void bcopy_nf(void *,void *,int);
+void bcopy_fn(void *,void *,int);
+void bcopy_ff(void *,void *,int);
+void bzero(void*, unsigned int);
+int bcmp(const void *, const void *, unsigned int);
 #ifdef __cplusplus
 };
 #endif

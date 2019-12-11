@@ -50,6 +50,7 @@ static char sccsid[] = "@(#)pmap_rmt.c 1.21 87/08/27 Copyr 1984 Sun Micro";
  */
 
 #include <rpc/rpc.h>
+#include <time.h>
 #ifdef WIN32
 #include <rpc/pmap_pro.h>
 #include <rpc/pmap_cln.h>
@@ -288,7 +289,7 @@ clnt_broadcast(prog, vers, proc, xargs, argsp, xresults, resultsp, eachresult)
 		goto done_broad;
 	}
 #ifdef SO_BROADCAST
-	if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, &on, sizeof (on)) < 0) {
+	if (setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (void*)&on, sizeof (on)) < 0) {
 		perror("Cannot set socket option SO_BROADCAST");
 		stat = RPC_CANTSEND;
 		goto done_broad;
@@ -356,11 +357,10 @@ clnt_broadcast(prog, vers, proc, xargs, argsp, xresults, resultsp, eachresult)
                 msg.acpted_rply.ar_results.proc = xdr_rmtcallres;
 		readfds = mask;
 #ifdef WIN32
-		switch (select(0 /* unused in winsock */, &readfds, (int *)NULL,
+		switch (select(0 /* unused in winsock */, &readfds, (fd_set *)NULL, (fd_set *)NULL, &t)) {
 #else
-		switch (select(_rpc_dtablesize(), &readfds, (int *)NULL, 
+		switch (select(_rpc_dtablesize(), &readfds, (int *)NULL, (int *)NULL, &t)) {
 #endif
-			       (int *)NULL, &t)) {
 		case 0:  /* timed out */
 			stat = RPC_TIMEDOUT;
 			continue;

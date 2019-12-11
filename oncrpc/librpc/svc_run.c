@@ -73,7 +73,7 @@ svc_run()
 		readfds = svc_fds;
 #endif /* def FD_SETSIZE */
 #ifdef WIN32
-		switch (select(0 /* unused in winsock */, &readfds, (int *)0, (int *)0,
+		switch (select(0 /* unused in winsock */, &readfds, (fd_set *)0, (fd_set *)0,
 #else
 		switch (select(_rpc_dtablesize(), &readfds, (int *)0, (int *)0,
 #endif

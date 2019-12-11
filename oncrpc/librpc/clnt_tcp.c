@@ -190,7 +190,7 @@ clnttcp_create(raddr, prog, vers, sockp, sendsz, recvsz)
 
 		slinger.l_onoff = 1;
 		slinger.l_linger = 0;
-		setsockopt(*sockp, SOL_SOCKET, SO_LINGER, &slinger, sizeof(struct linger));
+		setsockopt(*sockp, SOL_SOCKET, SO_LINGER, (void*)&slinger, sizeof(struct linger));
 
 		if ((*sockp == INVALID_SOCKET)
 		    || (connect(*sockp, (struct sockaddr *)raddr,
@@ -473,7 +473,7 @@ readtcp(ct, buf, len)
 	while (TRUE) {
 		readfds = mask;
 #ifdef WIN32
-		switch (select(0 /* unused in winsock */, &readfds, (int*)NULL, (int*)NULL,
+		switch (select(0 /* unused in winsock */, &readfds, (fd_set*)NULL, (fd_set*)NULL,
 			       &(ct->ct_wait))) {
 		case 0:
 			ct->ct_error.re_status = RPC_TIMEDOUT;

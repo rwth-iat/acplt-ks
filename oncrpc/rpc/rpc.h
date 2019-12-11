@@ -55,6 +55,7 @@
 #define FD_SETSIZE	128
 
 #include <stdlib.h>
+#include <time.h>
 #ifdef __BORLANDC__
 #include <winsock.h>
 #else
@@ -80,6 +81,9 @@ extern void nt_rpc_report(DOTS);
 
 #include <rpc/bcopy.h>
 extern int xdr_opaque_auth(DOTS);
+
+int bindresvport(int sd, struct sockaddr_in *sin);
+void get_myaddress(struct sockaddr_in *addr);
 
 #ifdef __cplusplus
 };

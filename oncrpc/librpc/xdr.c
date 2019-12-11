@@ -53,8 +53,9 @@ static char sccsid[] = "@(#)xdr.c 1.35 87/08/12";
  */
 
 #include <stdio.h>
-char *malloc();
+#include <strings.h>
 
+#include <rpc/rpc.h>
 #include <rpc/types.h>
 #include <rpc/xdr.h>
 
@@ -343,7 +344,7 @@ xdr_opaque(xdrs, cp, cnt)
 	register u_int cnt;
 {
 	register u_int rndup;
-	static crud[BYTES_PER_XDR_UNIT];
+	static unsigned char crud[BYTES_PER_XDR_UNIT];
 
 	/*
 	 * if no data we are done
