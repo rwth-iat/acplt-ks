@@ -13,6 +13,18 @@ build-linux64:
     paths:
       - build-linux64/export/
 
+build-win64:
+  stage: build
+  script:
+    - mkdir build-win64
+    - cd build-win64
+    - cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw-w64-x86_64.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=export ..
+    - make -j$(nproc)
+    - make install
+  artifacts:
+    paths:
+      - build-win64/export/
+
 build-win32:
   stage: build
   script:
