@@ -4,7 +4,6 @@ if(BUILD_RPC)
             librpc/auth_non.c
             librpc/auth_uni.c
             librpc/authunix.c
-            librpc/bcopy.c
             librpc/bindresv.c
             librpc/clnt_gen.c
             librpc/clnt_per.c

@@ -301,12 +301,12 @@ struct call_params {\n\
 	params = (struct call_params*) malloc (sizeof(struct call_params));\n\
 \n\
 	params->%s = (struct svc_req*) malloc (sizeof(struct svc_req));\n\
-	bcopy(%s, params->rqstp, sizeof(struct svc_req));\n\
+	memcpy(%s, params->rqstp, sizeof(struct svc_req));\n\
 \n\
 	params->transp = %s;\n\
 \n\
 	params->arg = malloc (sizeof(%s));\n\
-	bcopy(&%s, params->arg, sizeof(%s));\n\
+	memcpy(&%s, params->arg, sizeof(%s));\n\
 \n\
 	params->local = %s;\n\
 \n\

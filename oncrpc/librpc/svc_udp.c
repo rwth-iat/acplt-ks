@@ -503,7 +503,7 @@ int cache_get(xprt, msg, replyp, replylenp)
 	register struct svcudp_data *su = su_data(xprt);
 	register struct udp_cache *uc = (struct udp_cache *) su->su_cache;
 
-#	define EQADDR(a1, a2)	(bcmp((char*)&a1, (char*)&a2, sizeof(a1)) == 0)
+#define EQADDR(a1, a2)	(memcmp((char*)&a1, (char*)&a2, sizeof(a1)) == 0)
 
 	loc = CACHE_LOC(xprt, su->su_xid);
 	for (ent = uc->uc_entries[loc]; ent != NULL; ent = ent->cache_next) {

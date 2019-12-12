@@ -79,7 +79,7 @@ extern int rpc_nt_init(void);
 extern int rpc_nt_exit(void);
 extern void nt_rpc_report(DOTS);
 
-#include <rpc/bcopy.h>
+#define bzero(ptr, size) memset((ptr), 0, (size))
 extern int xdr_opaque_auth(DOTS);
 
 int bindresvport(int sd, struct sockaddr_in *sin);

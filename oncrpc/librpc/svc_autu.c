@@ -91,7 +91,7 @@ _svcauth_unix(rqst, msg)
 			stat = AUTH_BADCRED;
 			goto done;
 		}
-		bcopy((caddr_t)buf, aup->aup_machname, (u_int)str_len);
+		memcpy((caddr_t)buf, aup->aup_machname, (u_int)str_len);
 		aup->aup_machname[str_len] = 0;
 		str_len = RNDUP(str_len);
 		buf += str_len / sizeof (long);

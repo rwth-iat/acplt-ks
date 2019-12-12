@@ -305,7 +305,7 @@ xdrrec_putbytes(xdrs, addr, len)
 	while (len > 0) {
 		current = (u_int)rstrm->out_boundry - (u_int)rstrm->out_finger;
 		current = (len < current) ? len : current;
-		bcopy(addr, rstrm->out_finger, current);
+		memcpy(addr, rstrm->out_finger, current);
 		rstrm->out_finger += current;
 		addr += current;
 		len -= current;
@@ -556,7 +556,7 @@ get_input_bytes(rstrm, addr, len)
 			continue;
 		}
 		current = (len < current) ? len : current;
-		bcopy(rstrm->in_finger, addr, current);
+		memcpy(rstrm->in_finger, addr, current);
 		rstrm->in_finger += current;
 		addr += current;
 		len -= current;

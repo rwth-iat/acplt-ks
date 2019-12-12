@@ -87,7 +87,7 @@ char my_name[MAX_NAME_LEN];
 
 	addr->sin_family = AF_INET;
 	addr->sin_port = htons(PMAPPORT);
-	bcopy((char *)Hostent->h_addr, (char *)&addr->sin_addr, 
+	memcpy((char *)Hostent->h_addr, (char *)&addr->sin_addr,
 							Hostent->h_length);
 
 #else	

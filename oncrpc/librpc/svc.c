@@ -116,7 +116,7 @@ xprt_register(xprt)
 		old_xports = xports;
 		xports = (SVCXPRT **)
 			mem_alloc(2 * sizeof_xports * sizeof(SVCXPRT *));
-		bcopy(old_xports, xports, sizeof_xports * sizeof(SVCXPRT *));
+		memcpy(old_xports, xports, sizeof_xports * sizeof(SVCXPRT *));
 		sizeof_xports = 2 * sizeof_xports;
 	}
 
