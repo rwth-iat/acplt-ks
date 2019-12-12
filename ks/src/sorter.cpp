@@ -23,6 +23,8 @@
 
 //////////////////////////////////////////////////////////////////////
 
+#include <cstdint>
+
 #include "ks/sorter.h"
 #include "ks/package.h"
 
@@ -40,8 +42,8 @@ operator == (const KscSorter::Key &k1, const KscSorter::Key &k2)
 unsigned long
 KscSorter::Key::hash() const 
 {
-    return (unsigned long)av_module 
-        + (unsigned long)server;
+    return (uintptr_t)av_module
+        + (uintptr_t)server;
 }
 
 //////////////////////////////////////////////////////////////////////

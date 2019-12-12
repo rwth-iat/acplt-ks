@@ -18,9 +18,6 @@ endif ()
 if(WIN32 OR CYGWIN)
     # windows and cygwin need separate rpc library
     set(BUILD_RPC True)
-    # this oncrpc only compiles for 32 bit
-    add_compile_options(-m32)
-    add_link_options(-m32)
 else()
     set(BUILD_RPC False)
 endif()

@@ -254,7 +254,7 @@ class PltKeyPlainConstPtr
 {
 public:
     PltKeyPlainConstPtr(const T *p = 0);
-    unsigned long hash() const;
+    unsigned long long  hash() const;
     bool operator == (const PltKeyPlainConstPtr & p) const;
     const T & operator * () const;
     const T * operator ->() const;
@@ -564,11 +564,14 @@ PltKeyPlainConstPtr<T>::PltKeyPlainConstPtr(const T *p)
 //////////////////////////////////////////////////////////////////////
 
 template <class T>
-inline unsigned long
+inline unsigned long long
 PltKeyPlainConstPtr<T>::hash() const
 {
-    unsigned long h = (unsigned long) _p;
-    h = h ^ ((h >> 24) & 0xFF)
+    unsigned long long h = (unsigned long long) _p;
+    h = h ^ ((h >> 48) & 0xFF)
+          ^ ((h >> 40) & 0xFF)
+          ^ ((h >> 32) & 0xFF)
+          ^ ((h >> 24) & 0xFF)
           ^ ((h >> 16) & 0xFF)
           ^ ((h >>  8) & 0xFF);
     return h;
