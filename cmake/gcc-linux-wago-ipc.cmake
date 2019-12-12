@@ -7,6 +7,9 @@ set(OV_ARCH_i386 TRUE)
 # recommended toolchain for wago IPC is OSELAS 2011.03.2 for i586 linux
 set(TOOLCHAIN_PATH /opt/OSELAS.Toolchain-2011.03.2/i586-unknown-linux-gnu/gcc-4.5.2-glibc-2.13-binutils-2.21.1-kernel-2.6.36-sanitized)
 
+# needed for this particular compiler
+add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-std=c++0x>)
+
 # cross compilers to use for C, C++ and Fortran
 set(CMAKE_C_COMPILER ${TOOLCHAIN_PATH}/bin/${TOOLCHAIN_PREFIX}-gcc)
 set(CMAKE_CXX_COMPILER ${TOOLCHAIN_PATH}/bin/${TOOLCHAIN_PREFIX}-g++)
