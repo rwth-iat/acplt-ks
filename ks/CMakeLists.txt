@@ -1,4 +1,8 @@
 
+# option for custom rpc library and include path
+set(RPC_LIB_NAME "" CACHE STRING "rpc library name")
+set(RPC_INCLUDE_PATH "" CACHE STRING "include path for rpc library")
+
 # define ks library
 add_library(ks ${PLT_BUILD_TYPE}
         src/array.cpp
@@ -23,12 +27,15 @@ add_library(ks ${PLT_BUILD_TYPE}
 
 target_compile_definitions(ks PRIVATE PLT_USE_BUFFERED_STREAMS=1)
 
-target_include_directories(ks PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
+target_include_directories(ks PUBLIC include)
 
 target_link_libraries(ks plt)
 
 if(BUILD_RPC)
     target_link_libraries(ks rpc)
+elseif(RPC_LIB_NAME)
+    target_include_directories(ks PUBLIC ${RPC_INCLUDE_PATH})
+    target_link_libraries(ks ${RPC_LIB_NAME})
 endif()
 
 
