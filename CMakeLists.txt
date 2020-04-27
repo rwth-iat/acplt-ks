@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
 
-PROJECT(dbcommands)
+PROJECT(acplt-ks)
 
 # disable debug define because code won't compile otherwise
 add_compile_definitions(NDEBUG)
@@ -24,26 +24,24 @@ endif()
 
 # set SYSTEM define
 if(UNIX)
-    add_compile_definitions(plt PLT_SYSTEM_LINUX=1)
+    add_compile_definitions(PLT_SYSTEM_LINUX=1)
 elseif(WIN32)
-    add_compile_definitions(plt PLT_SYSTEM_NT=1)
+    add_compile_definitions(PLT_SYSTEM_NT=1)
 endif()
 
 # add subfolders
 add_subdirectory(plt)
 add_subdirectory(oncrpc)
 add_subdirectory(ks)
-add_subdirectory(fbs_dienste)
 
 # define install rules
-install(TARGETS fb_dbcommands
-        RUNTIME DESTINATION bin)
-
 if(${BUILD_DYNAMIC})
-    install(TARGETS plt ks kscln dbservices
+    install(TARGETS plt ks kscln
+            RUNTIME DESTINATION bin
             LIBRARY DESTINATION lib)
     if(${BUILD_RPC})
         install(TARGETS rpc
+                RUNTIME DESTINATION bin
                 LIBRARY DESTINATION lib)
     endif()
 endif ()
