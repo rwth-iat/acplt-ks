@@ -6,7 +6,7 @@ PROJECT(acplt-ks)
 add_compile_definitions(NDEBUG)
 
 # option for static/dynamic build
-option(BUILD_DYNAMIC "build libaries dynamic" OFF)
+option(BUILD_DYNAMIC "build libraries dynamic" OFF)
 
 if (${BUILD_DYNAMIC})
     set(PLT_BUILD_TYPE SHARED)
